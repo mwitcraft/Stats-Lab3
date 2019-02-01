@@ -1,0 +1,36 @@
+---
+title: "Lab7Worked"
+author: "Mason Witcraft"
+date: "February 1, 2019"
+output: html_document
+runtime: shiny
+---
+
+```{r slr, echo=FALSE}
+library(ggplot2)
+
+spruce.df = read.csv("SPRUCE.csv")
+
+inputPanel(
+  selectInput("plotg", "Choose plot type", list(`points` = c("Linear Regression", "Points", "Joined Points")))
+)
+
+renderPlot({
+  plot = ggplot(spruce.df, aes(x = BHDiameter, y = Height, colour = BHDiameter))
+  
+  points = plot + geom_point() 
+  
+  pointsJoined = points + geom_line() 
+  
+  linearRegression = plot + geom_smooth(method = "lm")
+  
+  if(input$plotg == "Points") print(points) 
+  if(input$plotg == "Joined Points") print(pointsJoined)
+  if(input$plotg == "Linear Regression") print(linearRegression)
+   
+})
+
+
+```
+
+

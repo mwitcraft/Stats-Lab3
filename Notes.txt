@@ -1,0 +1,1 @@
+windows() function equivalent for linux: x11()
